@@ -4,6 +4,7 @@ from matplotlib.image import imsave
 from matplotlib.image import imread
 from scipy.signal import convolve2d
 from lib.kernels import *
+from mpl_toolkits.mplot3d import axes3d
 import cv2
 
 
@@ -51,3 +52,17 @@ class ImageProcessing:
         AtLow = Bt * index
         Alow = np.fft.ifft2(AtLow).real
         imsave("assets/resultImg.jpg", Alow, cmap="gray")
+
+    @staticmethod
+    def visualize_image(img_path):
+        A = imread(img_path)
+        B = np.mean(A, -1)
+        plt.rcParams['figure.figsize'] = [6, 6]
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        x, y = np.meshgrid(np.arange(1, np.shape(B)[1]+1), np.arange(1, np.shape(B)[0]+1))
+        ax.plot_surface(x[0::10, 0::10], y[0::10, 0::10], 256 - B[0::10, 0::10], cmap="viridis", edgecolor='none')
+        ax.set_title("Surface plot")
+        ax.mouse_init()
+        ax.view_init(200, 270)
+        plt.show()

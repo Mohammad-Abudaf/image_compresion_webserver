@@ -26,10 +26,10 @@ def disconnect(sid):
 
 
 def main():
-    ImageProcessing.cap_image()
-    ImageProcessing.compress('assets/opencv_frame_0.png', 0.05)
-
-    eventlet.wsgi.server(eventlet.listen(('', 5000)), app)
+    # ImageProcessing.cap_image()
+    # ImageProcessing.compress('assets/opencv_frame_0.png', 0.05)
+    ImageProcessing.visualize_image('assets/cv.jpg')
+    # eventlet.wsgi.server(eventlet.listen(('', 5000)), app)
     return None
 
 
